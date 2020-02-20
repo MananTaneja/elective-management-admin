@@ -1,0 +1,17 @@
+.App__Form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+  border-radius: 25px;
+  padding: 20px;
+  width: 450px;
+  height: 300px;
+}
+
+.Form__Title {
+  font-size: 25px;
+  color: blue;
+  font-weight: 600;
+}
