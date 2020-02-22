@@ -37,9 +37,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#home">Elective Management System</Navbar.Brand>
-        </Navbar>
         <div>{this.state.user ? (<Home />) : (<Login />)}</div>
       </div>
     );
