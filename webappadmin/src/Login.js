@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fire from './config/Fire';
-import Background from './bg-01.jpg';
+import Background from './images/bg-01.jpg';
 
 class Login extends Component {
     constructor(props) {
@@ -55,18 +55,15 @@ class Login extends Component {
                                 <input value={this.state.email} onChange={this.handleChange} type="email" name="email" className="input100" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                                 <span className="focus-input100" data-placeholder="&#xf207;"></span>
                             </div>
+                            <br/>
+                            <br/>
                             <div className="form-group wrap-input100 validate-input">
                                 {/* <label for="exampleInputPassword1">Password</label> */}
                                 <input value={this.state.password} onChange={this.handleChange} type="password" name="password" className="input100" id="exampleInputPassword1" placeholder="Password" />
                                 <span className="focus-input100" data-placeholder="&#xf191;"></span>
                             </div>
-
-                            <div className="contact100-form-checkbox">
-                                <input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" />
-                                <label className="label-checkbox100">
-                                    Remember me
-						            </label>
-                            </div>
+                            <br/>
+                            <br/>
                             <div className="container-login100-form-btn">
                                 <button type="submit" onClick={this.login} className="login100-form-btn">Login</button>
                             </div>
