@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import fire from './config/Fire';
 import { Table } from 'react-bootstrap';
-
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import Electives from './Electives';
+ 
 class Home extends Component {
 
     constructor(props) {
@@ -128,7 +130,20 @@ class Home extends Component {
                 <div className="container-login100-form-btn">
                     <button className="login100-form-btn" onClick={this.logout}>Logout</button>
                 </div>
+
+                <Router>
+                        <Link to="/electives">Elective Data</Link>
+                 
+                    <Switch>
+                        <Route path = "/electives">
+                            <Electives dataFromParent = {this.state.faculties}/>
+                        </Route>
+                    </Switch>
+                </Router>
+
             </div>
+
+            
 
         )
     }
