@@ -3,7 +3,6 @@ import './App.css';
 import fire from './config/Fire';
 import Login from './Login';
 import Home from './Home';
-import { Navbar } from 'react-bootstrap';
 
 class App extends Component {
 
