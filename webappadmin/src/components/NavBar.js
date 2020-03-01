@@ -19,18 +19,18 @@ class NavBar extends Component {
         return(
             <div>
                 <Router>
-                    <Navbar bg="dark" variant="dark">
+                    <Navbar bg="primary" variant="dark">
                         <Navbar.Brand href="#">Admin</Navbar.Brand>
                         <Nav className="mr-auto">
                             <Navbar.Brand>
-                                <Link to="/database">Database</Link>
+                                <Link to="/database" className="text-white">Database</Link>
                             </Navbar.Brand>
                             <Navbar.Brand>
-                                <Link to="/elective">Electives</Link>
+                                <Link to="/elective" className="text-white">Electives</Link>
                             </Navbar.Brand>
                         </Nav>
                         <Form inline>
-                            <Button variant="outline-light" onClick={this.logout}>Logout</Button>
+                            <Button className="btn btn-outline-primary my-2 my-sm-0" onClick={this.logout}>Logout</Button>
                         </Form>
                     </Navbar>
                     <Switch>
