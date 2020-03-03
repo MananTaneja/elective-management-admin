@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Database from './Database';
+import Faculty from './Faculty.js';
 import Electives from './Electives';
+import Student from './Student';
 import {Nav, Navbar, Form, Button } from 'react-bootstrap';
 import fire from '../config/Fire';
 import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
@@ -23,7 +24,10 @@ class NavBar extends Component {
                         <Navbar.Brand href="#">Admin</Navbar.Brand>
                         <Nav className="mr-auto">
                             <Navbar.Brand>
-                                <Link to="/database" className="text-white">Database</Link>
+                                <Link to="/faculty" className="text-white">Faculty</Link>
+                            </Navbar.Brand>
+                            <Navbar.Brand>
+                                <Link to="/student" className="text-white">Student</Link>
                             </Navbar.Brand>
                             <Navbar.Brand>
                                 <Link to="/elective" className="text-white">Electives</Link>
@@ -34,8 +38,11 @@ class NavBar extends Component {
                         </Form>
                     </Navbar>
                     <Switch>
-                        <Route path="/database">
-                            <Database />
+                        <Route path="/faculty">
+                            <Faculty />
+                        </Route>
+                        <Route path="/student">
+                            <Student />
                         </Route>
                         <Route path="/elective">
                             <Electives />

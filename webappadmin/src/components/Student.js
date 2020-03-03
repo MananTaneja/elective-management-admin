@@ -1,42 +1,18 @@
 import React, { Component } from 'react';
 import fire from '../config/Fire';
-import { Table } from 'react-bootstrap';
- 
-class Database extends Component {
+import { Table, Button, Form } from 'react-bootstrap';
 
+
+class Student extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            faculties: [],
             students: []
         };
     }
 
-
     componentDidMount() {
-        this.getFacultyData();
         this.getStudentData();
-    }
-
-    getFacultyData() {
-        const facRef = fire.database().ref("2/data/");
-        console.log(facRef);
-        facRef.once('value', (snapshot) => {
-            let faculties = snapshot.val();
-            let newState = [];
-            for (let faculty in faculties) {
-                newState.push({
-                    id: faculties[faculty].faculty_id,
-                    name: faculties[faculty].faculty_name,
-                    email: faculties[faculty].Email,
-                    preference: faculties[faculty].preference1
-                });
-            }
-            this.setState({
-                faculties: newState
-            });
-        })
-        console.log("Get Faculty  Data!");
     }
 
     getStudentData() {
@@ -62,37 +38,9 @@ class Database extends Component {
         console.log(this.state.students);
     }
 
-
-
     render() {
         return (
             <div className="col-md-6">
-                <h1>Faculty Data</h1>
-                <Table striped bordered hover variant="dark">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Preference</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.faculties.map((faculty) => {
-                            return (
-                                <tr>
-                                    <td>{faculty.id}</td>
-                                    <td>{faculty.name}</td>
-                                    <td>{faculty.email}</td>
-                                    <td>{faculty.preference}</td>
-                                </tr>
-                            )
-                        })}
-
-                    </tbody>
-                </Table>
-                <br />
-                <br />
                 <h1>Student Data</h1>
                 <Table striped bordered hover variant="dark">
                     <thead>
@@ -121,13 +69,16 @@ class Database extends Component {
 
                     </tbody>
                 </Table>
+                <br \>
+                <br \>
+                <Form>
+                </Form>
             </div>
-
-            
-
         )
     }
 }
 
 
-export default Database;
+
+
+export default Student;
