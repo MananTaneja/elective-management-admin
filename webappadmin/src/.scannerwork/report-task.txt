@@ -2,5 +2,5 @@ projectKey=sonar-testing-for-web-app
 serverUrl=http://localhost:9000
 serverVersion=8.1.0.31237
 dashboardUrl=http://localhost:9000/dashboard?id=sonar-testing-for-web-app
-ceTaskId=AXBsNKK9_raUkepatmU3
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AXBsNKK9_raUkepatmU3
+ceTaskId=AXB1h8aPtiyTN8_-AO_3
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXB1h8aPtiyTN8_-AO_3
