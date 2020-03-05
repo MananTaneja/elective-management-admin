@@ -9,6 +9,7 @@ class Student extends Component {
         this.state = {
             students: []
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -36,6 +37,18 @@ class Student extends Component {
             });
         })
         console.log(this.state.students);
+    }
+
+    writeStudentData() {
+
+    }
+
+    updateStudentData(student) {
+
+    }
+
+    handleSubmit(event) {
+        
     }
 
     render() {
