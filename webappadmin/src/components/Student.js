@@ -40,15 +40,26 @@ class Student extends Component {
     }
 
     writeStudentData() {
-
+        const studRef = fire.database().ref("3/data/");
+        studRef.set(this.state)
+        console.log("Data uploded to database");
     }
 
     updateStudentData(student) {
-
+        this.refs.rollno.value = student.rollno;
+        this.refs.student_name.value = student.student_name;
+        this.refs.email.value = student.Email;
+        this.refs.pref1.value = student.pref1;
+        this.refs.pref2.value = student.pref2;
+        this.refs.pref3.value = student.pref3;
+        console.log("The forms for students have been filled using the student value");
     }
 
     handleSubmit(event) {
-        
+        event.preventDefault();
+        let rollno = this.refs.rollno.value;
+        let student_name = this.refs.student_name.value;
+        let email = this.refs.email.value;
     }
 
     render() {
