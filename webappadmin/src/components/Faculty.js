@@ -9,6 +9,7 @@ class Faculty extends Component {
         this.state = {
             faculties: [],
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
@@ -17,7 +18,9 @@ class Faculty extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-
+        if(prevState != this.state) {
+            this.writeFacultyData();
+        }
     }
 
     getFacultyData() {
@@ -50,19 +53,26 @@ class Faculty extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const id = this.refs.id.value;
-        const name = this.refs.name.value;
-        const preference = this.refs.preference.value;
+        let id = this.refs.id.value;
+        let name = this.refs.name.value;
+        let preference = this.refs.preference.value;
+        const { faculties } = this.state; 
+        const facIndex = faculties.findIndex(data => {
+            console.log("Found Index" + id);
+            return data.id === id;
+        })
+        faculties[facIndex].name = name;
+        faculties[facIndex].preference = preference;
+        this.setState({ faculties });
+        this.refs.id.value = '';
+        this.refs.name.value = '';
+        this.refs.preference.value = '';
+    }
 
-        if(id && name ) {
-            const { faculties } = this.state; 
-            const facIndex = faculties.findIndex(data => {
-                return data.id === id;
-            })
-            faculties[facIndex].name = name;
-            faculties[facIndex].preference = preference;
-            this.setState({ faculties });
-        }
+    writeFacultyData() {
+        const facRef = fire.database().ref("2/data/");
+        facRef.set(this.state)
+        console.log("Data uploded to database");
     }
 
 
@@ -84,12 +94,12 @@ class Faculty extends Component {
                     <tbody>
                         {faculties.map((faculty) => {
                             return (
-                                <tr>
+                                <tr key={faculty.id }>
                                     <td>{faculty.id}</td>
                                     <td>{faculty.name}</td>
                                     <td>{faculty.email}</td>
                                     <td>{faculty.preference}</td>
-                                    <td><button onClick = {this.updateFacultyData(faculty)}>Click</button></td>
+                                    <td><button onClick = {this.updateFacultyData.bind(this,faculty)}>Click</button></td>
                                 </tr>
                             )
                         })}
@@ -99,10 +109,8 @@ class Faculty extends Component {
                 <br />
                 <br />
                 <Form onSubmit = {this.handleSubmit}>
-
                        
                     <div className="form-row">
-                    <input type="hidden" ref="uid" />
                     <div className="form-group col-md-6">
                         <label>ID</label>
                         <input

@@ -69,8 +69,8 @@ class Student extends Component {
 
                     </tbody>
                 </Table>
-                <br \>
-                <br \>
+                <br/>
+                <br/>
                 <Form>
                 </Form>
             </div>
