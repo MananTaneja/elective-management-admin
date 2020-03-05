@@ -9,7 +9,8 @@ electives = ['Natural Language Processing',
              'Cloud Computing',
              'Machine Learning',
              'Data Science',
-             'Internet Of Things']
+             'Internet Of Things',
+		'Biometrics']
 
 ##def str_time_prop(start, end, form, prop):
 ##    stime = time.mktime(time.strptime(start, form))
@@ -102,5 +103,5 @@ while True:
         if student['gotElective']==False:
             print('Student {} could not be allocated any of the electives'.format(student['Email']))
         else:
-            print(student['Email']+':', student['gotElective'])
+            print student['Email']+':', student['gotElective']
     print()
