@@ -132,6 +132,7 @@ class Student extends Component {
                                 ref="rollno"
                                 className="form-control"
                                 placeholder="Roll Number"
+                                readOnly
                         />
                     </div>
                     <div className="form-group col-md-6">
