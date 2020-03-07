@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fire from '../config/Fire';
-import { Table, Button, Form } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 class Electives extends Component {
 

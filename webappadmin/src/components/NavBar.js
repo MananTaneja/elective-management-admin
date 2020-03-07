@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Faculty from './Faculty.js';
-import Electives from './Electives';
-import Student from './Student';
+import Faculty from '../pages/Faculty.js';
+import Electives from '../pages/Electives'
+import Student from '../pages/Student';
 import {Nav, Navbar, Form, Button } from 'react-bootstrap';
 import fire from '../config/Fire';
 import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';

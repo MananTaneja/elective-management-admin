@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fire from '../config/Fire';
-import { Table, Button, Form } from 'react-bootstrap';
+import { Table, Form } from 'react-bootstrap';
  
 class Faculty extends Component {
 
@@ -18,7 +18,7 @@ class Faculty extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(prevState != this.state) {
+        if(prevState !== this.state) {
             this.writeFacultyData();
         }
     }
