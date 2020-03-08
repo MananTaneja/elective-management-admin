@@ -45,7 +45,7 @@ electives = [i['name'] for i in electives]
 ##    firebase.put('/3/data/students', str(1+i), data)
 ##    firebase.put('/5/data/transactions', str(1+i), data2)
 
-for i in range(1):
+for iterations in range(1):
     faculties = dict(firebase.get('/2/data', ''))['faculties']
     students = dict(firebase.get('/3/data', ''))['students']
     transactions = dict(firebase.get('/5/data', ''))['transactions']
@@ -109,6 +109,9 @@ for i in range(1):
             noElectiveStudents.append(student['roll'])
         else:
             print(student['roll']+':', student['gotElective'])
+            for i in range(len(transactions)):
+                if transactions[i]['roll']==student['roll']:
+                    firebase.put('/5/data/transactions/'+str(i), 'chosen', student['gotElective'])
     print()
 
     noElectiveStudents = [i for i in noElectiveStudents if i!='']
@@ -117,3 +120,6 @@ for i in range(1):
         for i in noElectiveStudents:
             print(i)
     print()
+
+    for i in range(len(electives)):
+        firebase.put('/4/data/electives/'+str(i), 'max_allowed', maxStudents(electives[i]))
