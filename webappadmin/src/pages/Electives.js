@@ -29,6 +29,7 @@ class Electives extends Component {
                     isLab: electives[elective].isLab,
                     classroom: electives[elective].classroom,
                     max_allowed: electives[elective].max_allowed,
+                    numOfStudents: electives[elective].numOfStudents
                 });
             }
             this.setState({
@@ -49,6 +50,7 @@ class Electives extends Component {
                             <th>Credits</th>
                             <th>Lab</th>
                             <th>Class Room</th>
+                            <th>Students Enrolled</th>
                             <th>Max Allowed</th>
                         </tr>
                     </thead>
@@ -61,6 +63,7 @@ class Electives extends Component {
                                     <td>{elective.credits}</td>
                                     <td>{elective.isLab}</td>
                                     <td>{elective.classroom}</td>
+                                    <td>{elective.numOfStudents}</td>
                                     <td>{elective.max_allowed}</td>
                                 </tr>
                             )
