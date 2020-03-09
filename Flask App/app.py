@@ -1,56 +1,62 @@
+from threading import Thread
+from flask import Flask
+from flask_mail import Mail, Message
 from firebase import firebase
 import random
 import time
 from datetime import datetime
-from flask import Flask
 import json
 
 firebase = firebase.FirebaseApplication('https://elective-management-system.firebaseio.com/')
 
-electives = firebase.get('/4/data/electives', '')
-electives = [i['name'] for i in electives]
-
 app = Flask(__name__)
 
-##def str_time_prop(start, end, form, prop):
-##    stime = time.mktime(time.strptime(start, form))
-##    etime = time.mktime(time.strptime(end, form))
-##    ptime = stime + prop * (etime - stime)
-##    return time.strftime(form, time.localtime(ptime))
-##
-##def random_date(start, end, prop):
-##    return str_time_prop(start, end, '%d/%m/%Y %I:%M %p', prop)
-##
-##def random_elective(other_than):
-##    random_index = random.randint(0, len(electives)-1)
-##    while electives[random_index] in other_than:
-##        random_index = random.randint(0, len(electives)-1)
-##    return electives[random_index]
-##
-##for i in range(20):
-##    Date, time1, time2 = random_date('1/1/2020 6:00 PM', '1/6/2020 6:00 AM', random.random()).split()
-##    Time = time1 + ' ' + time2
-##    first = random_elective([])
-##    second = random_elective([first])
-##    third = random_elective([first, second])
-##    data = {
-##        'email': 'teststudent'+str(i+1)+'@gmail.com',
-##        'pref1': first,
-##        'pref2': second,
-##        'pref3': third,
-##        'roll': 'CSE'+str(i+1).rjust(3, '0'),
-##        'name': 'student'+str(i+1)
-##    }
-##    data2 = {
-##        'dateTime': Date+' '+Time,
-##        'chosen': '',
-##        'roll': 'CSE'+str(i+1).rjust(3, '0')
-##    }
-##    firebase.put('/3/data/students', str(1+i), data)
-##    firebase.put('/5/data/transactions', str(1+i), data2)
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_DEBUG']  = True
+app.config['MAIL_USERNAME'] = 'electiveadm99@gmail.com'
+app.config['MAIL_PASSWORD'] = 'projectsecurity'
 
-@app.route('/')
+mail = Mail(app)
+
+def send_async_mail(app, msg):
+    with app.app_context():
+        mail.send(msg)
+
+@app.route('/send-mail')
+def send_mail():
+    try:
+        msg = Message("Elective Management Admin", 
+        sender='electiveadm99@gmail.com',
+        recipients=(['akashpremrajan@gmail.com', 'shreyaarockz@gmail.com']),
+        )
+        msg.body = "\nHi,\nSorry to inform you that none of your first 3 electives can be allotted to you, we regret the inconvienence.\nYou will have to inform the admin at admin@gmail.com to make changes!"
+        thr = Thread(target=send_async_mail, args=[app, msg])
+        thr.start()
+        return 'Mail sent'
+    except Exception as e:
+        return(str(e))
+
+@app.route('/sendStudents')
+def send_students():
+    students = dict(firebase.get('/3/data', ''))['students']
+    for student in students:
+        msg = Message("Elective Management Admin", 
+        sender='electiveadm99@gmail.com',
+        #recipients=([student['email']]),
+        recipients=(['akashpremrajan@gmail.com']),
+        )
+        msg.body = "\nHi,\nAn elective of your choice has been alloted to you. Please verify the same.\nIn case of discrepancy, please inform the admin at admin@gmail.com to make changes!\nNote that you email id is {}".format(student['email'])
+        thr = Thread(target=send_async_mail, args=[app, msg])
+        thr.start()
+    return 'Mail sent'
+
+@app.route('/algorithm')
 def algorithm():
+    electives = firebase.get('/4/data/electives', '')
+    electives = [i['name'] for i in electives]
     faculties = dict(firebase.get('/2/data', ''))['faculties']
     students = dict(firebase.get('/3/data', ''))['students']
     transactions = dict(firebase.get('/5/data', ''))['transactions']
@@ -131,5 +137,5 @@ def algorithm():
 
     return json.dumps(students)
 
-if __name__=="__main__":
-    app.run()
+if __name__ == '__main__':
+    app.run(debug=True)
