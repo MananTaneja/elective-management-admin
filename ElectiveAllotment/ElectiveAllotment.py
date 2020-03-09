@@ -2,11 +2,15 @@ from firebase import firebase
 import random
 import time
 from datetime import datetime
+from flask import Flask
+import json
 
 firebase = firebase.FirebaseApplication('https://elective-management-system.firebaseio.com/')
 
 electives = firebase.get('/4/data/electives', '')
 electives = [i['name'] for i in electives]
+
+app = Flask(__name__)
 
 ##def str_time_prop(start, end, form, prop):
 ##    stime = time.mktime(time.strptime(start, form))
@@ -45,7 +49,8 @@ electives = [i['name'] for i in electives]
 ##    firebase.put('/3/data/students', str(1+i), data)
 ##    firebase.put('/5/data/transactions', str(1+i), data2)
 
-for iterations in range(1):
+@app.route('/')
+def algorithm():
     faculties = dict(firebase.get('/2/data', ''))['faculties']
     students = dict(firebase.get('/3/data', ''))['students']
     transactions = dict(firebase.get('/5/data', ''))['transactions']
@@ -123,3 +128,8 @@ for iterations in range(1):
 
     for i in range(len(electives)):
         firebase.put('/4/data/electives/'+str(i), 'max_allowed', maxStudents(electives[i]))
+
+    return json.dumps(students)
+
+if __name__=="__main__":
+    app.run()
