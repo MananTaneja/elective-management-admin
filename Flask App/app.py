@@ -42,15 +42,18 @@ def send_mail():
 @app.route('/sendStudents')
 def send_students():
     students = dict(firebase.get('/3/data', ''))['students']
-    for student in students:
-        msg = Message("Elective Management Admin", 
-        sender='electiveadm99@gmail.com',
-        #recipients=([student['email']]),
-        recipients=(['akashpremrajan@gmail.com']),
-        )
-        msg.body = "\nHi,\nAn elective of your choice has been alloted to you. Please verify the same.\nIn case of discrepancy, please inform the admin at admin@gmail.com to make changes!\nNote that you email id is {}".format(student['email'])
-        thr = Thread(target=send_async_mail, args=[app, msg])
-        thr.start()
+    for i in range(len(students)):
+        student = students[i]
+        if not student['gotConfirmation']:
+            msg = Message("Student Confirmation", 
+            sender='electiveadm99@gmail.com',
+            #recipients=([student['email']]),
+            recipients=(['akashpremrajan@gmail.com']),
+            )
+            msg.body = "\nHi,\nAn elective of your choice has been alloted to you. Please verify the same.\nIn case of discrepancy, please inform the admin at admin@gmail.com to make changes!\nNote that you email id is {}".format(student['email'])
+            thr = Thread(target=send_async_mail, args=[app, msg])
+            thr.start()
+            firebase.put('/3/data/students/'+str(i), 'gotConfirmation', True)
     return 'Mail sent'
 
 @app.route('/algorithm')
@@ -136,6 +139,9 @@ def algorithm():
         firebase.put('/4/data/electives/'+str(i), 'max_allowed', maxStudents(electives[i]))
 
     return json.dumps(students)
+
+#@app.route('/classroomAllotment')
+#def classroomAllotment()
 
 if __name__ == '__main__':
     app.run(debug=True)
