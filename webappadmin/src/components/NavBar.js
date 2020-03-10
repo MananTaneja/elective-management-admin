@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Faculty from '../pages/Faculty.js';
 import Electives from '../pages/Electives'
 import Student from '../pages/Student';
+import Actions from '../pages/Actions';
 import {Nav, Navbar, Form, Button } from 'react-bootstrap';
 import fire from '../config/Fire';
 import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
@@ -32,6 +33,9 @@ class NavBar extends Component {
                             <Navbar.Brand>
                                 <Link to="/elective" className="text-white">Electives</Link>
                             </Navbar.Brand>
+                            <Navbar.Brand>
+                                <Link to="/actions" className="text-white">Actions</Link>
+                            </Navbar.Brand>
                         </Nav>
                         <Form inline>
                             <Button className="btn btn-outline-primary my-2 my-sm-0" onClick={this.logout}>Logout</Button>
@@ -46,6 +50,9 @@ class NavBar extends Component {
                         </Route>
                         <Route path="/elective">
                             <Electives />
+                        </Route>
+                        <Route path="/actions">
+                            <Actions />
                         </Route>
                     </Switch>
                 </Router>
