@@ -10,6 +10,7 @@ pylint = "*"
 flask = "*"
 flask-mail = "*"
 firebase = "*"
+python-firebase = "*"
 
 [requires]
 python_version = "3.7"

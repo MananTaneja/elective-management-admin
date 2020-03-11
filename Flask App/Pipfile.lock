@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f5006e482575dbde943674e6be4406dad4995714cf043aea49e2e8f0d5493f6c"
+            "sha256": "62e00a1dc09203417af9d5a9200a5c2901a8e5bd572fd408c291b227dc03cae4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -38,10 +38,10 @@
         },
         "click": {
             "hashes": [
-                "sha256:2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13",
-                "sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"
+                "sha256:8a18b4ea89d8820c5d0c7da8a64b2c324b4dabb695804dbfea19b9be9d88c0cc",
+                "sha256:e345d143d80bf5ee7534056164e5e112ea5e22716bbb1ce727941f4c8b471b9a"
             ],
-            "version": "==7.0"
+            "version": "==7.1.1"
         },
         "firebase": {
             "hashes": [
@@ -124,6 +124,13 @@
             ],
             "version": "==1.1.1"
         },
+        "python-firebase": {
+            "hashes": [
+                "sha256:824b45947611325fab0c9c7ce6b15f0f31c387b7873a90664601c7427baede0f"
+            ],
+            "index": "pypi",
+            "version": "==1.2"
+        },
         "requests": {
             "hashes": [
                 "sha256:43999036bfa82904b6af1d99e4882b560e5e2c68e5c4b0aa03b655f3d7d73fee",
@@ -153,6 +160,14 @@
                 "sha256:840947ebfa8b58f318d42301cf8c0a20fd794a33b61cc4638e28e9e61ba32f42"
             ],
             "version": "==2.3.3"
+        },
+        "colorama": {
+            "hashes": [
+                "sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff",
+                "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"
+            ],
+            "markers": "sys_platform == 'win32'",
+            "version": "==0.4.3"
         },
         "isort": {
             "hashes": [

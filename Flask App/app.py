@@ -42,6 +42,12 @@ def send_mail():
 @app.route('/sendStudents')
 def send_students():
     students = dict(firebase.get('/3/data', ''))['students']
+    electives = dict(firebase.get('/4/data', ''))['electives']
+    faculties = dict(firebase.get('/2/data', ''))['faculties']
+    transactions = dict(firebase.get('/5/data', ''))['transactions']
+    classrooms = dict(firebase.get('/6/data', ''))['classrooms']
+    labs = dict(firebase.get('/6/data', ''))['labs']
+
     for i in range(len(students)):
         student = students[i]
         if not student['gotConfirmation']:
@@ -56,13 +62,16 @@ def send_students():
             firebase.put('/3/data/students/'+str(i), 'gotConfirmation', True)
     return 'Mail sent'
 
-@app.route('/algorithm')
-def algorithm():
-    electives = firebase.get('/4/data/electives', '')
-    electives = [i['name'] for i in electives]
-    faculties = dict(firebase.get('/2/data', ''))['faculties']
+@app.route('/electiveAllotment')
+def electiveAllotment():
     students = dict(firebase.get('/3/data', ''))['students']
+    electives = dict(firebase.get('/4/data', ''))['electives']
+    faculties = dict(firebase.get('/2/data', ''))['faculties']
     transactions = dict(firebase.get('/5/data', ''))['transactions']
+    classrooms = dict(firebase.get('/6/data', ''))['classrooms']
+    labs = dict(firebase.get('/6/data', ''))['labs']
+
+    electives = [i['name'] for i in electives]
 
     numberOfStudents = {}
     for elective in electives:
@@ -140,8 +149,57 @@ def algorithm():
 
     return json.dumps(students)
 
-#@app.route('/classroomAllotment')
-#def classroomAllotment()
+@app.route('/classroomAllotment')
+def classroomAllotment():
+    students = dict(firebase.get('/3/data', ''))['students']
+    electives = dict(firebase.get('/4/data', ''))['electives']
+    faculties = dict(firebase.get('/2/data', ''))['faculties']
+    transactions = dict(firebase.get('/5/data', ''))['transactions']
+    classrooms = dict(firebase.get('/6/data', ''))['classrooms']
+    labs = dict(firebase.get('/6/data', ''))['labs']
+
+    classrooms = [(i, classrooms[i]) for i in range(len(classrooms))]
+    labs = [(i, labs[i]) for i in range(len(labs))]
+
+    for i in range(len(electives)):
+        elective = electives[i]
+        if not elective['isLab']:
+            firebase.put('/4/data/electives/'+str(i), 'lab', False)
+            if elective["classroom"]=="":
+                random.shuffle(classrooms)
+                for classroom in classrooms:
+                    index, classroom = classroom[0], classroom[1]
+                    if classroom['isAvailable']:
+                        cls = classroom['classroomNumber']
+                        firebase.put('/4/data/electives/'+str(i), 'classroom', cls)
+                        firebase.put('/6/data/classrooms/'+str(index), 'isAvailable', False)
+                        elective["classroom"] = cls
+                        classroom["isAvailable"] = False
+                        break
+        if elective['isLab']:
+            if elective["classroom"]=="":
+                random.shuffle(classrooms)
+                for classroom in classrooms:
+                    index, classroom = classroom[0], classroom[1]
+                    if classroom['isAvailable']:
+                        cls = classroom['classroomNumber']
+                        firebase.put('/4/data/electives/'+str(i), 'classroom', cls)
+                        firebase.put('/6/data/classrooms/'+str(index), 'isAvailable', False)
+                        elective["classroom"] = cls
+                        classroom["isAvailable"] = False
+                        break
+            if elective["lab"]=="":
+                random.shuffle(labs)
+                for lab in labs:
+                    index, lab = lab[0], lab[1]
+                    if lab['isAvailable']:
+                        lb = lab['roomNumber']
+                        firebase.put('/4/data/electives/'+str(i), 'lab', lb)
+                        firebase.put('/6/data/labs/'+str(index), 'isAvailable', False)
+                        elective["lab"] = lb
+                        lab["isAvailable"] = False
+                        break
+    return json.dumps({})
 
 if __name__ == '__main__':
     app.run(debug=True)
