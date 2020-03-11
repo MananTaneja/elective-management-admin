@@ -14,6 +14,8 @@ class Login extends Component {
     }
 
     handleChange(e) {
+        e.preventDefault();
+        
         this.setState({ [e.target.name]: e.target.value });
     }
 
@@ -42,13 +44,13 @@ class Login extends Component {
                                 Log in
 					        </span>
                             <div className="form-group wrap-input100 validate-input">
-                                <input value={this.state.email} onChange={this.handleChange} type="email" name="email" className="input100" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                                <input value={this.state.email} onChange={this.handleChange} type="email" name="email" className="input100" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required/>
                                 <span className="focus-input100" data-placeholder="&#xf207;"></span>
                             </div>
                             <br/>
                             <br/>
                             <div className="form-group wrap-input100 validate-input">
-                                <input value={this.state.password} onChange={this.handleChange} type="password" name="password" className="input100" id="exampleInputPassword1" placeholder="Password" />
+                                <input value={this.state.password} onChange={this.handleChange} type="password" name="password" className="input100" id="exampleInputPassword1" placeholder="Password" required/>
                                 <span className="focus-input100" data-placeholder="&#xf191;"></span>
                             </div>
                             <br/>

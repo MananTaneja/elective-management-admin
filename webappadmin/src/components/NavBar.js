@@ -22,26 +22,26 @@ class NavBar extends Component {
         return(
             <div>
                 <Router>
-                    <Navbar bg="primary" variant="dark">
+                    <Navbar bg="dark" variant="dark">
                         <Navbar.Brand>
-                            <Link to="/" className="text-white">Home</Link>
+                            <Link to="/"><img src="https://img.icons8.com/cute-clipart/25/000000/home-page.png"/></Link>
                         </Navbar.Brand>
                         <Nav className="mr-auto">
                             <Navbar.Brand>
-                                <Link to="/faculty" className="text-white">Faculty</Link>
+                                <Link className="text-white" to="/faculty">Faculty</Link>
                             </Navbar.Brand>
                             <Navbar.Brand>
-                                <Link to="/student" className="text-white">Student</Link>
+                                <Link className="text-white" to="/student">Student</Link>
                             </Navbar.Brand>
                             <Navbar.Brand>
-                                <Link to="/elective" className="text-white">Electives</Link>
+                                <Link className="text-white" to="/elective">Electives</Link>
                             </Navbar.Brand>
                             <Navbar.Brand>
-                                <Link to="/actions" className="text-white">Actions</Link>
+                                <Link className="text-white" to="/actions">Actions</Link>
                             </Navbar.Brand>
                         </Nav>
                         <Form inline>
-                            <Button className="btn btn-outline-primary my-2 my-sm-0" onClick={this.logout}>Logout</Button>
+                            <Link className="bg-white" style={{borderRadius: '15px'}} onClick={this.logout}><img src="https://img.icons8.com/dotty/30/000000/logout-rounded.png"/></Link>
                         </Form>
                     </Navbar>
                     <Switch>
