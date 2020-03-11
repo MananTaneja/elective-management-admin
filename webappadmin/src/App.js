@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import fire from './config/Fire';
 import Login from './pages/Login';
-import Home from './pages/Home';
+import NavBar from './components/NavBar';
 
 class App extends Component {
 
@@ -36,7 +36,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div>{this.state.user ? (<Home />) : (<Login />)}</div>
+        <div>{this.state.user ? (<NavBar />) : (<Login />)}</div>
       </div>
     );
   }
