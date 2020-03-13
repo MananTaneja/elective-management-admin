@@ -42,11 +42,6 @@ def send_mail():
 @app.route('/sendStudents')
 def send_students():
     students = dict(firebase.get('/3/data', ''))['students']
-    electives = dict(firebase.get('/4/data', ''))['electives']
-    faculties = dict(firebase.get('/2/data', ''))['faculties']
-    transactions = dict(firebase.get('/5/data', ''))['transactions']
-    classrooms = dict(firebase.get('/6/data', ''))['classrooms']
-    labs = dict(firebase.get('/6/data', ''))['labs']
 
     for i in range(len(students)):
         student = students[i]
@@ -68,8 +63,6 @@ def electiveAllotment():
     electives = dict(firebase.get('/4/data', ''))['electives']
     faculties = dict(firebase.get('/2/data', ''))['faculties']
     transactions = dict(firebase.get('/5/data', ''))['transactions']
-    classrooms = dict(firebase.get('/6/data', ''))['classrooms']
-    labs = dict(firebase.get('/6/data', ''))['labs']
 
     electives = [i['name'] for i in electives]
 
@@ -147,14 +140,12 @@ def electiveAllotment():
     for i in range(len(electives)):
         firebase.put('/4/data/electives/'+str(i), 'max_allowed', maxStudents(electives[i]))
 
+    print(type(json.dumps(students)))
     return json.dumps(students)
 
 @app.route('/classroomAllotment')
 def classroomAllotment():
-    students = dict(firebase.get('/3/data', ''))['students']
     electives = dict(firebase.get('/4/data', ''))['electives']
-    faculties = dict(firebase.get('/2/data', ''))['faculties']
-    transactions = dict(firebase.get('/5/data', ''))['transactions']
     classrooms = dict(firebase.get('/6/data', ''))['classrooms']
     labs = dict(firebase.get('/6/data', ''))['labs']
 
