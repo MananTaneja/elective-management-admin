@@ -4,7 +4,7 @@ import Electives from '../pages/Electives'
 import Student from '../pages/Student';
 import Actions from '../pages/Actions';
 import Home from '../pages/Home';
-import {Nav, Navbar, Form, Button } from 'react-bootstrap';
+import {Nav, Navbar, Form } from 'react-bootstrap';
 import fire from '../config/Fire';
 import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ class NavBar extends Component {
                 <Router>
                     <Navbar bg="dark" variant="dark">
                         <Navbar.Brand>
-                            <Link to="/"><img src="https://img.icons8.com/cute-clipart/25/000000/home-page.png"/></Link>
+                            <Link to="/"><img src="https://img.icons8.com/cute-clipart/25/000000/home-page.png" alt="home_button" /></Link>
                         </Navbar.Brand>
                         <Nav className="mr-auto">
                             <Navbar.Brand>
@@ -41,7 +41,7 @@ class NavBar extends Component {
                             </Navbar.Brand>
                         </Nav>
                         <Form inline>
-                            <Link className="bg-white" style={{borderRadius: '15px'}} onClick={this.logout}><img src="https://img.icons8.com/dotty/30/000000/logout-rounded.png"/></Link>
+                            <Link className="bg-white" style={{borderRadius: '15px'}} onClick={this.logout}><img src="https://img.icons8.com/dotty/30/000000/logout-rounded.png" alt="logout_button" /></Link>
                         </Form>
                     </Navbar>
                     <Switch>
