@@ -61,9 +61,10 @@ class Actions extends Component {
             method: 'GET',
             mode: 'no-cors'
         })
+        .then((response) => {return response.json();})
         .then((response) => {
-            console.log(response)
-            this.updateProgress(100)
+            console.log(response);
+            this.updateProgress(100);
         })
     }
 

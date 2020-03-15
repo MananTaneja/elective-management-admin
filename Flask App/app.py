@@ -120,11 +120,14 @@ def electiveAllotment():
     print()
     print('The Electives were allocated as follows: ')
     noElectiveStudents = []
+    num = {}
     for student in students:
         if student['gotElective']==False:
             noElectiveStudents.append(student['roll'])
         else:
             print(student['roll']+':', student['gotElective'])
+            try: num[student['gotElective']]+=1
+            except: num[student['gotElective']] = 1
             for i in range(len(transactions)):
                 if transactions[i]['roll']==student['roll']:
                     firebase.put('/5/data/transactions/'+str(i), 'chosen', student['gotElective'])
@@ -139,9 +142,15 @@ def electiveAllotment():
 
     for i in range(len(electives)):
         firebase.put('/4/data/electives/'+str(i), 'max_allowed', maxStudents(electives[i]))
+        try:
+            firebase.put('/4/data/electives/'+str(i), 'numOfStudents', num[electives[i]])
+        except:
+            firebase.put('/4/data/electives/'+str(i), 'numOfStudents', 0)
 
-    print(type(json.dumps(students)))
-    return json.dumps(students)
+    d = {}
+    for i in range(len(students)):
+        d[i] = students[i]
+    return d
 
 @app.route('/classroomAllotment')
 def classroomAllotment():
@@ -156,7 +165,7 @@ def classroomAllotment():
         elective = electives[i]
         if not elective['isLab']:
             firebase.put('/4/data/electives/'+str(i), 'lab', False)
-            if elective["classroom"]=="":
+            if elective["classroom"]=="" and elective["numOfStudents"]!=0:
                 random.shuffle(classrooms)
                 for classroom in classrooms:
                     index, classroom = classroom[0], classroom[1]
@@ -168,7 +177,7 @@ def classroomAllotment():
                         classroom["isAvailable"] = False
                         break
         if elective['isLab']:
-            if elective["classroom"]=="":
+            if elective["classroom"]=="" and elective["numOfStudents"]!=0:
                 random.shuffle(classrooms)
                 for classroom in classrooms:
                     index, classroom = classroom[0], classroom[1]
@@ -179,7 +188,7 @@ def classroomAllotment():
                         elective["classroom"] = cls
                         classroom["isAvailable"] = False
                         break
-            if elective["lab"]=="":
+            if elective["lab"]=="" and elective["numOfStudents"]!=0:
                 random.shuffle(labs)
                 for lab in labs:
                     index, lab = lab[0], lab[1]
@@ -190,7 +199,7 @@ def classroomAllotment():
                         elective["lab"] = lb
                         lab["isAvailable"] = False
                         break
-    return json.dumps({})
+    return {}
 
 if __name__ == '__main__':
     app.run(debug=True)
