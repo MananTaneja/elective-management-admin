@@ -26,7 +26,7 @@ class Electives extends Component {
                     course_code: electives[elective].course_code,
                     name: electives[elective].name,
                     credits: electives[elective].credits,
-                    isLab: electives[elective].isLab,
+                    lab: electives[elective].lab,
                     classroom: electives[elective].classroom,
                     max_allowed: electives[elective].max_allowed,
                     numOfStudents: electives[elective].numOfStudents
@@ -48,7 +48,7 @@ class Electives extends Component {
                             <th>Course Code</th>
                             <th>Name</th>
                             <th>Credits</th>
-                            <th>Lab</th>
+                            <th>Lab Room</th>
                             <th>Class Room</th>
                             <th>Students Enrolled</th>
                             <th>Max Allowed</th>
@@ -61,7 +61,7 @@ class Electives extends Component {
                                     <td>{elective.course_code}</td>
                                     <td>{elective.name}</td>
                                     <td>{elective.credits}</td>
-                                    <td>{elective.isLab}</td>
+                                    <td>{elective.lab}</td>
                                     <td>{elective.classroom}</td>
                                     <td>{elective.numOfStudents}</td>
                                     <td>{elective.max_allowed}</td>
