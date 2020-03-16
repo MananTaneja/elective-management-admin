@@ -57,14 +57,13 @@ class Actions extends Component {
 
     sendStudents() {
         this.updateProgress(50);
-        fetch('http://localhost:5000/sendStudents', {
+        fetch('http://localhost:5000/send-mail', {
             method: 'GET',
             mode: 'no-cors'
         })
-        .then((response) => {return response.json();})
         .then((response) => {
-            console.log(response);
-            this.updateProgress(100);
+            console.log(response)
+            this.updateProgress(100)
         })
     }
 

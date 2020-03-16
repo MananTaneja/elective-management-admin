@@ -30,7 +30,7 @@ def send_mail():
     try:
         msg = Message("Elective Management Admin", 
         sender='electiveadm99@gmail.com',
-        recipients=(['akashpremrajan@gmail.com', 'shreyaarockz@gmail.com']),
+        recipients=(['mariwalla.latika@gmail.com']),
         )
         msg.body = "\nHi,\nSorry to inform you that none of your first 3 electives can be allotted to you, we regret the inconvienence.\nYou will have to inform the admin at admin@gmail.com to make changes!"
         thr = Thread(target=send_async_mail, args=[app, msg])
