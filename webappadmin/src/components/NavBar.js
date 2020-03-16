@@ -28,7 +28,7 @@ class NavBar extends Component {
                         </Navbar.Brand>
                         <Nav className="mr-auto">
                             <Navbar.Brand>
-                                <Link className="text-white" to="/faculty">Faculty</Link>
+                                <Link className="text-white" to="/faculty">Item 1</Link>
                             </Navbar.Brand>
                             <Navbar.Brand>
                                 <Link className="text-white" to="/student">Student</Link>
