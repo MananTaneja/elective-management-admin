@@ -61,7 +61,7 @@ class Electives extends Component {
                                     <td>{elective.course_code}</td>
                                     <td>{elective.name}</td>
                                     <td>{elective.credits}</td>
-                                    <td>{elective.lab}</td>
+                                    <td id={elective.course_code}>{elective.lab}</td>
                                     <td>{elective.classroom}</td>
                                     <td>{elective.numOfStudents}</td>
                                     <td>{elective.max_allowed}</td>
